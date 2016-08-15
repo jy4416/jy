@@ -1,0 +1,133 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    version="3.0">
+
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>FriendServlet</servlet-name>
+  	<display-name>FriendServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.jy.servlet.FriendServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>GroupServlet</servlet-name>
+  	<display-name>GroupServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.jy.servlet.GroupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>FriendServlet</servlet-name>
+  	<url-pattern>/FriendServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>GroupServlet</servlet-name>
+  	<url-pattern>/GroupServlet</url-pattern>
+  </servlet-mapping>
+  
+    <listener>
+        <description>Spring监听器</description>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- ContextLoaderListener初始化Spring上下文时需要使用到的contextConfigLocation参数 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <!-- 配置spring.xml和spring-mybatis.xml这两个配置文件的位置，固定写法 -->
+        <param-value>/WEB-INF/classes/spring.xml</param-value>
+    </context-param>
+    
+    	<filter>  
+        <filter-name>HttpMethodFilter</filter-name>  
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>HttpMethodFilter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>
+	
+	  
+    
+    <servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+			<init-param>
+			    <param-name>contextConfigLocation</param-name>
+			    <param-value>classpath:spring-mvc.xml</param-value>
+			</init-param>
+			<load-on-startup>1</load-on-startup>
+		</servlet>
+   
+		<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	 <filter>  
+        <filter-name>HttpPutMethodFilter</filter-name>  
+        <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>HttpPutMethodFilter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>
+
+	
+  	 <!-- 字符编码配置 -->
+    <filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>  
+        <filter-name>characterEncodingFilter</filter-name>  
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+
+    
+    <!-- static resources 允许静态文件访问 --> 
+    <servlet-mapping>  
+    	<servlet-name>default</servlet-name>
+        <url-pattern>*.css</url-pattern>  
+    </servlet-mapping>
+
+    <servlet-mapping> 
+    	<servlet-name>default</servlet-name> 
+        <url-pattern>*.gif</url-pattern>  
+    </servlet-mapping>
+    
+    <servlet-mapping>
+    	<servlet-name>default</servlet-name>  
+        <url-pattern>*.png</url-pattern>  
+    </servlet-mapping>
+  
+    <servlet-mapping>
+    	<servlet-name>default</servlet-name>  
+        <url-pattern>*.jpg</url-pattern>  
+    </servlet-mapping>
+  
+    <servlet-mapping> 
+    	<servlet-name>default</servlet-name> 
+        <url-pattern>*.js</url-pattern>  
+    </servlet-mapping>
+     
+     <servlet>
+    	<description>
+    	</description>
+    	<display-name>LoginServlet</display-name>
+    	<servlet-name>LoginServlet</servlet-name>
+    	<servlet-class>com.jy.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>LoginServlet</servlet-name>
+    	<url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>  
+    
+</web-app>

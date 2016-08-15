@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration> 
+    <classPathEntry location="E:\maven\localRepository\maven_jar\mysql\mysql-connector-java\5.1.34\mysql-connector-java-5.1.34.jar" /> 
+  <context id="mysqlTables" targetRuntime="MyBatis3">
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/addressbook"
+     userId="root" password="root"/>
+    
+    <!-- 指定生成的类型为java类型，避免数据库中number等类型字段 -->
+    <javaTypeResolver>
+      <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+    
+    <!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MAVEN来自动生成 -->
+    <javaModelGenerator targetPackage="com.jy.domain" targetProject="jy">
+      <property name="enableSubPackages" value="true"/>
+    </javaModelGenerator>
+    
+    <!--对应的xml mapper文件  -->
+    <sqlMapGenerator targetPackage="mapping" targetProject="jy">
+      <property name="enableSubPackages" value="true"/>
+    </sqlMapGenerator>
+    
+    <!-- 对应的dao接口 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.jy.dao" targetProject="jy">
+      <property name="enableSubPackages" value="true"/>
+    </javaClientGenerator>
+    
+    <table tableName="friend" enableCountByExample="false"
+	enableUpdateByExample="false" enableDeleteByExample="false"
+	enableSelectByExample="false" selectByExampleQueryId="false" domainObjectName="Friend">
+
+	  <columnOverride column="fid" property="fId" />
+      <columnOverride column="fname" property="fName" />
+	  <columnOverride column="sex" property="sex" javaType="java.lang.String"/>
+       <columnOverride column="birthday" property="birthday" javaType="java.lang.String"/>
+       <columnOverride column="email" property="email" />
+       <columnOverride column="mobile" property="mobile" />
+        <columnOverride column="fdetail" property="fDetail" />
+         <columnOverride column="faddress" property="fAddress" />
+	</table>
+    <table tableName="fgroup" domainObjectName="Group" enableCountByExample="false"
+	enableUpdateByExample="false" enableDeleteByExample="false"
+	enableSelectByExample="false" selectByExampleQueryId="false">
+     	  <columnOverride column="gid" property="gId"  />
+     	   <columnOverride column="gname" property="gName" javaType="java.lang.String" />
+     	    <columnOverride column="gdetail" property="gDetail" javaType="java.lang.String" />
+	</table>
+  </context>
+</generatorConfiguration>
