@@ -57,7 +57,12 @@ public interface GroupMapper {
      */
     int updateByPrimaryKey(Group record);
     
+    
+    
     List<Group> selectGroups(Group group);
+    
+    
+    
     
     List<Group> selectGroupsPage(@Param(value="group") Group group,
     		@Param(value="pageNum") int pageNum,@Param(value="pageSize") int pageSize);

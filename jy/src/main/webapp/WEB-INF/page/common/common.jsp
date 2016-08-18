@@ -20,6 +20,12 @@ String resources=url+"resources";
 <!-- Basic Styles
 <link rel="stylesheet" type="text/css" 
 	href="${resources}/common/css/bootstrap.min.css">
-	-->
+	
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+-->
+
+<link rel="stylesheet" type="text/css" 
+	href="${resourcesUrl}/common/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" 
+	href="${resourcesUrl}/common/css/jquery-ui.css">

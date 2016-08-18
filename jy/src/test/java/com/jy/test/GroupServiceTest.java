@@ -1,11 +1,14 @@
 package com.jy.test;
 
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+
+import com.github.pagehelper.PageInfo;
 import com.jy.domain.Group;
 import com.jy.service.GroupService;
 
@@ -19,7 +22,9 @@ public class GroupServiceTest extends BaseTest{
 	public void testGroupService(){
 		Group group=new Group();
 		//group.setgName("同");
-		List<Group> list=groupService.getGroups(group, 0, 2);
+		PageInfo page=groupService.getGroups(group, 2, 2);
+		List<Group> list=page.getList();
+	
 		for(Group g:list ){
 			System.out.println(g.getgName()+"   "+g.getgId());
 		}
@@ -32,8 +37,8 @@ public class GroupServiceTest extends BaseTest{
 		Group group=new Group();
 		group.setgName("aab");
 		group.setgDetail("ddddd");
-		int count= groupService.addGroup(group);
-		Assert.assertTrue(count>0);
+//		int count= groupService.addGroup(group);
+//		Assert.assertTrue(count>0);
 	}
 	
 	@Test
@@ -67,6 +72,15 @@ public class GroupServiceTest extends BaseTest{
 		Group group=new Group();
 		group.setgName("同");
 		int count= groupService.getGroupCount(group);
+		Assert.assertTrue(count>0);
+		System.out.println(count);
+	}
+	@Test
+	public void testTran(){
+		Group group=new Group();
+		group.setgName("a6");
+		group.setgDetail("d6");
+		int count=groupService.addGroup(group);
 		Assert.assertTrue(count>0);
 		System.out.println(count);
 	}

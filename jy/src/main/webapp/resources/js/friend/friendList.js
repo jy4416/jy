@@ -19,7 +19,7 @@ function initTable(){
 				url : BASE+'friends',
 				pagination : true,
 				showPaginationSwitch :false,
-				pageSize : 4,
+				pageSize : 5,
 				pageList : [ 5, 10, 15,20],
 				search : false,
 				showExport : false,

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.PageInfo;
 import com.jy.domain.Group;
 import com.jy.service.GroupService;
 
@@ -34,12 +35,14 @@ public class GroupController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/groups",produces="application/json")
 	public Map<String,Object> getGroups(Group group,
-			@RequestParam(value="offset",required=true) int pageNum,
+			@RequestParam(value="offset",required=true) int pageNo,
 			@RequestParam(value="limit",required=true) int pageSize){
 		Map<String,Object> retMap=new HashMap();
 		try {
-			List<Group> list=groupService.getGroups(group,pageNum,pageSize);
-			int count=groupService.getGroupCount(group);
+			int pageNum=(int)Math.ceil((double)(pageNo+1)/pageSize);		
+			PageInfo page=groupService.getGroups(group,pageNum,pageSize);
+			List<Group> list=page.getList();
+			long count=page.getTotal();
 			retMap.put("rows", list);
 			retMap.put("total", count);
 		} catch (Exception e) {

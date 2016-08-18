@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jy.dao.FriendMapper;
 import com.jy.domain.Friend;
 
@@ -13,17 +14,14 @@ import com.jy.domain.Friend;
 public class FriendSerivceImpl implements FriendService{
 	@Autowired
 	private FriendMapper friendMapper;
-	public List<Friend> getFriends(Friend friend, int pageNum, int pageSize) {
+	public PageInfo getFriends(Friend friend, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		List<Friend> list=friendMapper.selectFriends(friend);
-		return list;
+		PageInfo page=new PageInfo(list);
+		return page;
 	}
 
-	public int getFriendCount(Friend friend) {
-		List<Friend> list=friendMapper.selectFriends(friend);
-		return list.size();
-	}
-
+	
 	public int addFriend(Friend friend) {
 		
 		return friendMapper.insertSelective(friend);

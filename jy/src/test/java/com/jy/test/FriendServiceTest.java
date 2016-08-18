@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 
+
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageInfo;
 import com.jy.domain.Friend;
 import com.jy.service.FriendService;
 
@@ -23,7 +25,8 @@ public class FriendServiceTest extends BaseTest{
 	public void testFriendService(){
 		Friend Friend=new Friend();
 		//Friend.setfName("a");
-		List<Friend> list=FriendService.getFriends(Friend, 0, 2);
+		PageInfo page=FriendService.getFriends(Friend, 1, 2);
+		List<Friend> list=page.getList();
 		
 		for(Friend g:list ){
 			System.out.println(JSON.toJSONString(g));
@@ -70,13 +73,6 @@ public class FriendServiceTest extends BaseTest{
 		System.out.println(Friend.getfName());
 	}
 	
-	@Test
-	public void testgetFriendCount(){
-		Friend Friend=new Friend();
-		Friend.setfName("a");
-		int count= FriendService.getFriendCount(Friend);
-		Assert.assertTrue(count>0);
-		System.out.println(count);
-	}
+	
 
 }

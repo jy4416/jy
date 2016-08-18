@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.PageInfo;
 import com.jy.domain.Friend;
 import com.jy.service.FriendService;
 
@@ -37,12 +38,14 @@ public class FriendController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="/friends",produces="application/json",method=RequestMethod.GET)
 	public Map<String,Object> getfriends(Friend friend,
-			@RequestParam(value="offset",required=true) int pageNum,
+			@RequestParam(value="offset",required=true) int pageNo,
 			@RequestParam(value="limit",required=true) int pageSize){
 		Map<String,Object> retMap=new HashMap();
 		try {
-			List<Friend> list=friendService.getFriends(friend,pageNum,pageSize);
-			int count=friendService.getFriendCount(friend);
+			int pageNum=(int)Math.ceil((double)(pageNo+1)/pageSize);
+			PageInfo page=friendService.getFriends(friend,pageNum,pageSize);
+			List<Friend> list=page.getList();
+			long count=page.getTotal();
 			retMap.put("rows", list);
 			retMap.put("total", count);
 		} catch (Exception e) {
